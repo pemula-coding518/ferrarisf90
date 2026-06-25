@@ -29,9 +29,16 @@ document.addEventListener("DOMContentLoaded", () => {
         const scrolled = window.scrollY;
         
         parallaxElements.forEach(el => {
-            const speed = 0.4;
-            const yPos = -(scrolled * speed);
-            el.style.transform = `translateY(${yPos}px) scale(1.05)`;
+            const parentRect = el.parentElement.getBoundingClientRect();
+            
+            // Only apply parallax if element is visible in the viewport
+            if (parentRect.top < window.innerHeight && parentRect.bottom > 0) {
+                const speed = 0.15;
+                // Calculate how far the center of the image is from the center of the viewport
+                const centerOffset = (window.innerHeight / 2) - (parentRect.top + parentRect.height / 2);
+                const yPos = centerOffset * speed;
+                el.style.transform = `translateY(${yPos}px) scale(1.15)`;
+            }
         });
         
         // Change navbar appearance on scroll
