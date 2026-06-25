@@ -347,12 +347,16 @@ h1, h2, h3, h4, h5, h6 {
 /* Gallery */
 .gallery-grid {
     display: grid;
-    grid-template-columns: 1fr;
-    gap: 4rem;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
 }
 
 .gallery-item {
     position: relative;
+}
+
+.gallery-item.large {
+    grid-column: span 2;
 }
 
 .image-wrapper {
